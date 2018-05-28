@@ -3,6 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 
 import java.awt.*;
 
@@ -11,6 +12,17 @@ public class Controller {
     Label score;
     @FXML
     Label action;
+
+    @FXML
+    Button addition;
+    @FXML
+    Button multiply;
+    @FXML
+    Button subtract;
+    @FXML
+    Button division;
+    @FXML
+    Button resultbtn;
 
     private long fnumber;
     private long snumber;
@@ -172,6 +184,12 @@ public class Controller {
         snumber = 0;
         score.setText("0");
         action.setText("");
+        score.setFont(new Font(45));
+        addition.setDisable(false);
+        subtract.setDisable(false);
+        multiply.setDisable(false);
+        division.setDisable(false);
+        resultbtn.setDisable(false);
     }
 
     public void clickAddition() {
@@ -231,8 +249,19 @@ public class Controller {
                     score.setText(String.valueOf(result));
                 break;
                 case '/':
-                    result = fnumber / snumber;
-                    score.setText(String.valueOf(result));
+                    if(snumber == 0) {
+                        score.setFont(new Font(18));
+                        score.setText("Nie można dzielić przez zero");
+                        addition.setDisable(true);
+                        subtract.setDisable(true);
+                        multiply.setDisable(true);
+                        division.setDisable(true);
+                        resultbtn.setDisable(true);
+                    }
+                    else {
+                        result = fnumber / snumber;
+                        score.setText(String.valueOf(result));
+                    }
                 break;
             }
             reset = true;
