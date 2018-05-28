@@ -29,159 +29,55 @@ public class Controller {
     private char operation = 'e';
     private boolean reset = false;
 
-    public void clickZero() {
+    private void setNumber(String number) {
         if(reset) {
             clickClear();
             reset = false;
         }
         String labelScore = score.getText();
         int labelInt =  Integer.parseInt(labelScore);
-        String set = "0";
         if(labelInt == 0)
-            labelScore = set;
+            labelScore = number;
         else
-            labelScore+= set;
+            labelScore+= number;
 
         score.setText(labelScore);
+    }
+
+    public void clickZero() {
+        setNumber("0");
     }
     public void clickOne() {
-        if(reset) {
-            clickClear();
-            reset = false;
-        }
-        String labelScore = score.getText();
-        int labelInt =  Integer.parseInt(labelScore);
-        String set = "1";
-        if(labelInt == 0)
-            labelScore = set;
-        else
-            labelScore+= set;
-
-        score.setText(labelScore);
+        setNumber("1");
     }
     public void clickTwo() {
-        if(reset) {
-            clickClear();
-            reset = false;
-        }
-        String labelScore = score.getText();
-        int labelInt =  Integer.parseInt(labelScore);
-        String set = "2";
-        if(labelInt == 0)
-            labelScore = set;
-        else
-            labelScore+= set;
-
-        score.setText(labelScore);
+        setNumber("2");
     }
     public void clickThree() {
-        if(reset) {
-            clickClear();
-            reset = false;
-        }
-        String labelScore = score.getText();
-        int labelInt =  Integer.parseInt(labelScore);
-        String set = "3";
-        if(labelInt == 0)
-            labelScore = set;
-        else
-            labelScore+= set;
-
-        score.setText(labelScore);
+        setNumber("3");
     }
     public void clickFour() {
-        if(reset) {
-            clickClear();
-            reset = false;
-        }
-        String labelScore = score.getText();
-        int labelInt =  Integer.parseInt(labelScore);
-        String set = "4";
-        if(labelInt == 0)
-            labelScore = set;
-        else
-            labelScore+= set;
-
-        score.setText(labelScore);
+        setNumber("4");
     }
     public void clickFife() {
-        if(reset) {
-            clickClear();
-            reset = false;
-        }
-        String labelScore = score.getText();
-        int labelInt =  Integer.parseInt(labelScore);
-        String set = "5";
-        if(labelInt == 0)
-            labelScore = set;
-        else
-            labelScore+= set;
-
-        score.setText(labelScore);
+        setNumber("5");
     }
     public void clickSix() {
-        if(reset) {
-            clickClear();
-            reset = false;
-        }
-        String labelScore = score.getText();
-        int labelInt =  Integer.parseInt(labelScore);
-        String set = "6";
-        if(labelInt == 0)
-            labelScore = set;
-        else
-            labelScore+= set;
-
-        score.setText(labelScore);
+        setNumber("6");
     }
     public void clickSeven() {
-        if(reset) {
-            clickClear();
-            reset = false;
-        }
-        String labelScore = score.getText();
-        int labelInt =  Integer.parseInt(labelScore);
-        String set = "7";
-        if(labelInt == 0)
-            labelScore = set;
-        else
-            labelScore+= set;
-
-        score.setText(labelScore);
+        setNumber("7");
     }
     public void clickEight() {
-        if(reset) {
-            clickClear();
-            reset = false;
-        }
-        String labelScore = score.getText();
-        int labelInt =  Integer.parseInt(labelScore);
-        String set = "8";
-        if(labelInt == 0)
-            labelScore = set;
-        else
-            labelScore+= set;
-
-        score.setText(labelScore);
+        setNumber("8");
     }
     public void clickNine() {
-        if(reset) {
-            clickClear();
-            reset = false;
-        }
-        String labelScore = score.getText();
-        int labelInt =  Integer.parseInt(labelScore);
-        String set = "9";
-        if(labelInt == 0)
-            labelScore = set;
-        else
-            labelScore+= set;
-
-        score.setText(labelScore);
+        setNumber("9");
     }
     public void clickClear() {
         fnumber = 0;
         snumber = 0;
+        operation = 'e';
         score.setText("0");
         action.setText("");
         score.setFont(new Font(45));
@@ -192,41 +88,27 @@ public class Controller {
         resultbtn.setDisable(false);
     }
 
-    public void clickAddition() {
+    private void setOperation(char operation) {
         if(reset)
             reset = false;
         String labelScore = score.getText();
         fnumber = Integer.parseInt(labelScore);
-        operation = '+';
+        this.operation = operation;
         action.setText(labelScore+operation);
         score.setText("0");
+    }
+
+    public void clickAddition() {
+        setOperation('+');
     }
     public void clickSubtract() {
-        if(reset)
-            reset = false;
-        String labelScore = score.getText();
-        fnumber = Integer.parseInt(labelScore);
-        operation = '-';
-        action.setText(labelScore+operation);
-        score.setText("0");
+        setOperation('-');
     }
     public void clickMultiply() {
-        if(reset)
-            reset = false;
-        String labelScore = score.getText();
-        fnumber = Integer.parseInt(labelScore);
-        operation = 'x';
-        action.setText(labelScore+operation);
-        score.setText("0");
+        setOperation('x');
     }
     public void clickDivision() {
-        if(reset)
-            reset = false;
-        String labelScore = score.getText();
-        fnumber = Integer.parseInt(labelScore);
-        operation = '/';
-        action.setText(labelScore+operation);
-        score.setText("0");
+        setOperation('/');
     }
     public void clickResult() {
         if(operation!='e') {
@@ -237,13 +119,13 @@ public class Controller {
             action.setText(String.valueOf(fnumber) + operation + String.valueOf(snumber) + "=");
             switch(operation) {
                 case '+':
-                    result = fnumber + snumber;
-                    score.setText(String.valueOf(result));
+                result = fnumber + snumber;
+                score.setText(String.valueOf(result));
                 break;
                 case '-':
                     result = fnumber - snumber;
                     score.setText(String.valueOf(result));
-                break;
+                    break;
                 case 'x':
                     result = fnumber * snumber;
                     score.setText(String.valueOf(result));
